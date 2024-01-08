@@ -6,27 +6,25 @@
   <div class="table-responsive" style="overflow: hidden;">
     <div class="table-wrapper">
       <div class="table-title">
-        <div class="row">
+        <div class="row my-5">
           <div class="col-sm-6">
             <h2>Manage Servers</h2>
           </div>
-          
-        </div>
-        <div class="col-sm-12 d-flex flex-row-reverse">
-          <button class="btn btn-primary m-2" type="button">Print Report</button>
-
-          <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#addServerModal">
-            <i class="material-icon mx-2">&#xE147;</i>
-            <span>New Server</span>
-          </button>
-          <select name="status" id="status" class="btn btn-info m-2" >
-            <option value="ALL">ALL</option>
-            <option value="UP">SERVER UP</option>
-            <option value="DOWN">SERVER DOWN</option>
-          </select>
+          <div class="col-sm-6 d-flex flex-row-reverse">
+            <button class="btn btn-primary m-2" type="button">Print Report</button>
+  
+            <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#addServerModal">
+              <i class="material-icon mx-2">&#xE147;</i>
+              <span>New Server</span>
+            </button>
+            <select name="status" id="status" class="btn btn-info m-2" >
+              <option value="ALL">ALL</option>
+              <option value="UP">SERVER UP</option>
+              <option value="DOWN">SERVER DOWN</option>
+            </select>
+          </div>
         </div>
       </div>
-      <br>
       <br>
       <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
         <ng-container *ngSwitchCase="DataState.LOADING_STATE">
@@ -54,7 +52,7 @@
                 <td>{{ server.ipAddress }}</td>
                 <td>{{ server.name }}</td>
                 <td>{{ server.memory }}</td>
-                <td>{{ server.type }}</td>
+                <td>{{ ServerType[server.type] }}</td>
                 <td>
                   <span class="badge"></span>
                   {{ server.status }}
@@ -64,7 +62,7 @@
                     <img src="./../assets/images/ping.png" alt="Ping" width="30" height="30">
                   </a>
                 </td>                
-                <td>{{ server.status }}</td>                
+                <td>{{ "Delete" }}</td>                
               </tr>
             </tbody>
           </table>
@@ -113,8 +111,8 @@
             <select class="form-control form-select form-select-lg mb-3" id="type" aria-label=".form-select-lg">
               <option selected>Select Type</option>
               <option value="SERVER">SERVER</option>
-              <option value="2">SERVER_DB</option>
-              <option value="2">SERVER_STACK</option>
+              <option value="SERVER_DB">SERVER DB</option>
+              <option value="SERVER_STACK">SERVER STACK</option>
             </select>
           </div>
           <div class="form-group">
