@@ -54,7 +54,7 @@
                 <td>{{ server.memory }}</td>
                 <td>{{ ServerType[server.type] }}</td>
                 <td>
-                  <span class="badge" [ngClass]="[server.status === Status.UP ? 'badge-success' : 'badge-danger']" style="width: 80%;">
+                  <span class="badge" [ngClass]="[server.status === Status.UP ? 'badge-success' : 'badge-danger']" style="width: 75%; height: 20px;">
                     {{ server.status }}
                   </span>
                 </td>
@@ -89,7 +89,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-3">
         <form>
           <div class="form-group">
             <label for="ip-address" class="col-form-label">IP Address:</label>
