@@ -5,6 +5,7 @@ import { AppState } from './interface/app-state';
 import { Observable, catchError, map, of, startWith } from 'rxjs';
 import { DataState } from './enum/data-state.enum';
 import { ServerType } from './enum/server-type.enum';
+import { Status } from './enum/status.enum';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
   appState$: Observable<AppState<CustomResponse>>;
   readonly DataState = DataState;
   readonly ServerType = ServerType;
+  readonly Status = Status;
   
   constructor(private serverService: ServerService) { }
 

@@ -12,12 +12,12 @@
           </div>
           <div class="col-sm-6 d-flex flex-row-reverse">
             <button class="btn btn-primary m-2" type="button">Print Report</button>
-  
+
             <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#addServerModal">
               <i class="material-icon mx-2">&#xE147;</i>
               <span>New Server</span>
             </button>
-            <select name="status" id="status" class="btn btn-info m-2" >
+            <select name="status" id="status" class="btn btn-info m-2">
               <option value="ALL">ALL</option>
               <option value="UP">SERVER UP</option>
               <option value="DOWN">SERVER DOWN</option>
@@ -54,15 +54,16 @@
                 <td>{{ server.memory }}</td>
                 <td>{{ ServerType[server.type] }}</td>
                 <td>
-                  <span class="badge"></span>
-                  {{ server.status }}
+                  <span class="badge" [ngClass]="[server.status === Status.UP ? 'badge-success' : 'badge-danger']" style="width: 80%;">
+                    {{ server.status }}
+                  </span>
                 </td>
                 <td>
                   <a style="cursor: pointor;">
                     <img src="./../assets/images/ping.png" alt="Ping" width="30" height="30">
                   </a>
-                </td>                
-                <td>{{ "Delete" }}</td>                
+                </td>
+                <td>{{ "Delete" }}</td>
               </tr>
             </tbody>
           </table>
