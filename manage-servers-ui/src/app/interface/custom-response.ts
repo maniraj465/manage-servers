@@ -3,7 +3,7 @@ import { Server } from "./server";
 export interface CustomResponse {
     timeStamp: Date;
     statusCode: number;
-    statsu: string;
+    status: string;
     reason: string;
     message: string;
     developerMessage: string;
