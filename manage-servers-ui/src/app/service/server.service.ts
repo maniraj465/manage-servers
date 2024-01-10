@@ -43,7 +43,7 @@ export class ServerService {
       catchError(this.handlerError)
     );
 
-  filter$ = (status: Status, response: CustomResponse) => <Observable<CustomResponse>>
+  filter$ = (status: string, response: CustomResponse) => <Observable<CustomResponse>>
     new Observable<CustomResponse>(
       Subscriber => {
         console.log(response);

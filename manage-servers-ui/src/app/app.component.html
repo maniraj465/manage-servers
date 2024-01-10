@@ -1,7 +1,3 @@
-<!-- <div>
-  {{appState$ | async | json }}
-</div> -->
-
 <div class="container-xl my-2" style="background-color: #607d8b;">
   <div class="table-responsive" style="overflow: hidden;">
     <div class="table-wrapper">
@@ -11,13 +7,13 @@
             <h2>Manage Servers</h2>
           </div>
           <div class="col-sm-6 d-flex flex-row-reverse">
-            <button class="btn btn-primary m-2" type="button">Print Report</button>
+            <button class="btn btn-primary m-2" type="button">Export Report</button>
 
             <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#addServerModal">
               <span class="material-icon mx-1">&#10010;</span>
               <span>New Server</span>
             </button>
-            <select name="status" id="status" class="btn btn-info m-2">
+            <select (change)="filterServers($event)" ngModel="ALL" name="status" id="status" class="btn btn-info m-2">
               <option value="ALL">ALL</option>
               <option value="UP">SERVER UP</option>
               <option value="DOWN">SERVER DOWN</option>
@@ -54,21 +50,27 @@
                 <td>{{ server.memory }}</td>
                 <td>{{ ServerType[server.type] }}</td>
                 <td>
-                  <span class="badge" [ngClass]="[server.status === Status.UP ? 'badge-success' : 'badge-danger']" style="width: 75%; height: 20px;">
+                  <span class="badge" [ngClass]="[server.status === Status.UP ? 'badge-success' : 'badge-danger']"
+                    style="width: 75%; height: 20px;">
                     {{ server.status }}
                   </span>
                 </td>
-                <td>                 
-                  <i *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" 
-                    class="material-icons" style="font-size: 30px;color:#4169e1;" title="Ping Server">&#xe328;</i>
-                  <i *ngIf="(filterStatus$ | async) === server.ipAddress"
-                    class="fa fa-spinner fa-spin" style="font-size: 24px;color:#ff9800;"></i>
+                <td>
+                  <a (click)="pingServer(server.ipAddress)" style="cursor: pointer;">
+                    <i *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress"
+                      class="material-icons" style="font-size: 30px;color:#4169e1;" title="Ping Server">
+                      &#xe328;
+                    </i>
+                    <i *ngIf="(filterStatus$ | async) === server.ipAddress" class="fa fa-spinner fa-spin"
+                      style="font-size: 24px;color:#ff9800;">
+                    </i>
+                  </a>
                 </td>
                 <td>
                   <a style="cursor: pointer;">
                     <i class="material-icons" style="font-size:30px;color:red">delete</i>
                   </a>
-                  </td>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -104,13 +106,15 @@
             <label for="name" class="col-form-label">Name:</label>
             <input type="text" class="form-control" id="name">
           </div>
-          <div class="form-group">
-            <label for="ram" class="col-form-label">Ram:</label>
-            <input type="text" class="form-control" id="ram">
-          </div>
-          <div class="form-group">
-            <label for="storage" class="col-form-label">Storage:</label>
-            <input type="text" class="form-control" id="storage">
+          <div class="form-group mb-3">
+            <label for="memory" class="col-form-label">Memory:</label>
+            <div class="input-group mb-3">
+              <input type="number" class="form-control" step="8" value="8" placeholder="Memory" id="ip-address"
+                name="ip-address">
+              <div class="input-group-append">
+                <span class="input-group-text">GB</span>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="type" class="col-form-label">Type:</label>
