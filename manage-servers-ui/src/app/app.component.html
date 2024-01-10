@@ -2,19 +2,19 @@
   {{appState$ | async | json }}
 </div> -->
 
-<div class="container-xl">
+<div class="container-xl" style="background-color: #607d8b;">
   <div class="table-responsive" style="overflow: hidden;">
     <div class="table-wrapper">
       <div class="table-title">
-        <div class="row my-5">
-          <div class="col-sm-6">
+        <div class="row my-4">
+          <div class="col-sm-6 text-white">
             <h2>Manage Servers</h2>
           </div>
           <div class="col-sm-6 d-flex flex-row-reverse">
             <button class="btn btn-primary m-2" type="button">Print Report</button>
 
             <button type="button" class="btn btn-success m-2" data-toggle="modal" data-target="#addServerModal">
-              <i class="material-icon mx-2">&#xE147;</i>
+              <span class="material-icon mx-1">&#10010;</span>
               <span>New Server</span>
             </button>
             <select name="status" id="status" class="btn btn-info m-2">
@@ -33,7 +33,7 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="DataState.LOADED_STATE">
-          <table class="table table-striped table-hover" id="servers">
+          <table class="table table-striped table-hover table-info" id="servers">
             <thead>
               <tr>
                 <th>Images</th>
@@ -58,19 +58,24 @@
                     {{ server.status }}
                   </span>
                 </td>
-                <td>
-                  <a style="cursor: pointor;">
-                    <img src="./../assets/images/ping.png" alt="Ping" width="30" height="30">
-                  </a>
+                <td>                 
+                  <i *ngIf="(filterStatus$ | async) === '' || (filterStatus$ | async) !== server.ipAddress" 
+                    class="material-icons" style="font-size: 30px;color:#4169e1;" title="Ping Server">&#xe328;</i>
+                  <i *ngIf="(filterStatus$ | async) === server.ipAddress"
+                    class="fa fa-spinner fa-spin" style="font-size: 24px;color:#ff9800;"></i>
                 </td>
-                <td>{{ "Delete" }}</td>
+                <td>
+                  <a style="cursor: pointer;">
+                    <i class="material-icons" style="font-size:30px;color:red">delete</i>
+                  </a>
+                  </td>
               </tr>
             </tbody>
           </table>
         </ng-container>
         <ng-container *ngSwitchCase="DataState.ERROR_STATE">
           <div class="alert-danger">
-            error
+            {{ appState.error }}
           </div>
         </ng-container>
       </ng-container>
@@ -89,7 +94,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body p-3">
+      <div class="modal-body px-3">
         <form>
           <div class="form-group">
             <label for="ip-address" class="col-form-label">IP Address:</label>

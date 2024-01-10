@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ServerService } from './service/server.service';
 import { CustomResponse } from './interface/custom-response';
 import { AppState } from './interface/app-state';
-import { Observable, catchError, map, of, startWith } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, startWith } from 'rxjs';
 import { DataState } from './enum/data-state.enum';
 import { ServerType } from './enum/server-type.enum';
 import { Status } from './enum/status.enum';
@@ -18,6 +18,8 @@ export class AppComponent {
   readonly DataState = DataState;
   readonly ServerType = ServerType;
   readonly Status = Status;
+  private filterSubject = new BehaviorSubject<string>('');
+  filterStatus$ = this.filterSubject.asObservable();
   
   constructor(private serverService: ServerService) { }
 

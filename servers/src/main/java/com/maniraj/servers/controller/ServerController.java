@@ -6,9 +6,6 @@ import com.maniraj.servers.model.Server;
 import com.maniraj.servers.service.implementation.ServerServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +27,13 @@ public class ServerController {
     private final ServerServiceImpl serverService;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getServers() throws InterruptedException {
+    public ResponseEntity<?> getServers() throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
+//        try {
+//            throw new InterruptedException("Error banner check");
+//        } catch (InterruptedException iex) {
+//            return iex;
+//        }
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
