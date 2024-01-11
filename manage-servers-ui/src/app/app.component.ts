@@ -91,14 +91,39 @@ export class AppComponent {
               message: '',
               developerMessage: ''
             });
-            document.getElementById('closeModel').click();
-            this.isLoading.next(false);
-            serverForm.resetForm({ status: this.Status.DOWN });
+          document.getElementById('closeModel').click();
+          this.isLoading.next(false);
+          serverForm.resetForm({ status: this.Status.DOWN });
           return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
         }),
         startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
         catchError((error: string) => {
           this.isLoading.next(false);
+          return of({ dataState: DataState.ERROR_STATE, error })
+        })
+      );
+  }
+
+  deleteServer(server: Server): void {
+    this.appState$ = this.serverService.delete$(server.id)
+      .pipe(
+        map(response => {
+          this.dataSubject.next(
+            {
+              ...response as object,
+              data: { servers: this.dataSubject.value.data.servers.filter(s => s.id !== server.id) },
+              timeStamp: undefined,
+              statusCode: 0,
+              status: '',
+              reason: '',
+              message: '',
+              developerMessage: ''
+            }
+          );
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
+        }),
+        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+        catchError((error: string) => {
           return of({ dataState: DataState.ERROR_STATE, error })
         })
       );
