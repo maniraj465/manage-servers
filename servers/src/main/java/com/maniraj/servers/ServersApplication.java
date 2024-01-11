@@ -23,25 +23,16 @@ public class ServersApplication {
 	@Bean
 	CommandLineRunner run(ServerRepository serverRepository) {
 		return args -> {
-//			serverRepository.save(new Server(null, "192.168.1.101", "Database Server", "64 GB", "100 TB", "SERVER_DB", "http://localhost:8080/servers/images/SERVER_DB_UP.png", Status.UP));
-//			serverRepository.save(new Server(null, "192.168.1.101", "Database Server", "64 GB", "SERVER_DB", "C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_DB_UP.png", Status.UP));
-//			serverRepository.save(new Server(null, "192.168.1.160", "Database Server", "64 GB", "SERVER_DB", "C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_DB_UP.png", Status.UP));
-//			serverRepository.save(new Server(null, "192.168.1.161", "Database Server", "64 GB", "SERVER_DB", "C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_DB_DOWN.png", Status.DOWN));
-//			serverRepository.save(new Server(null, "192.168.1.162", "Server Stack", "64 GB", "SERVER_STACK", "C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_STACK_UP.png", Status.UP));
-//			serverRepository.save(new Server(null, "192.168.1.163", "Server Stack", "64 GB", "SERVER_STACK", "C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_STACK_DOWN.png", Status.DOWN));
-//			serverRepository.save(new Server(null, "192.168.1.164", "Server", "32 GB", "SERVER", "C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_UP.png", Status.UP));
-//			serverRepository.save(new Server(null, "192.168.1.165", "Server", "32 GB", "SERVER", "C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_DOWN.png", Status.DOWN));
-
-			serverRepository.save(new Server(null, "192.168.1.101", "Database Server", "64 GB", "SERVER_DB", "http://localhost:8080/servers/images/SERVER_DB_UP.png", Status.UP));
-			serverRepository.save(new Server(null, "192.168.1.160", "Database Server", "64 GB", "SERVER_DB", "http://localhost:8080/servers/images/SERVER_DB_UP.png", Status.UP));
-			serverRepository.save(new Server(null, "192.168.1.161", "Database Server", "64 GB", "SERVER_DB", "http://localhost:8080/servers/images/SERVER_DB_DOWN.png", Status.DOWN));
-			serverRepository.save(new Server(null, "192.168.1.162", "Server Stack", "64 GB", "SERVER_STACK", "http://localhost:8080/servers/images/SERVER_STACK_UP.png", Status.UP));
-			serverRepository.save(new Server(null, "192.168.1.163", "Server Stack", "64 GB", "SERVER_STACK", "http://localhost:8080/servers/images/SERVER_STACK_DOWN.png", Status.DOWN));
+			serverRepository.save(new Server(null, "8.8.8.8", "Google Server", "64 GB", "SERVER", "http://localhost:8080/servers/images/SERVER_UP.png", Status.DOWN));
+			serverRepository.save(new Server(null, "23.208.145.176", "Microsoft DB Server", "64 GB", "SERVER_DB", "http://localhost:8080/servers/images/SERVER_DB_UP.png", Status.DOWN));
+			serverRepository.save(new Server(null, "74.6.160.106", "Yahoo Server", "64 GB", "SERVER_DB", "http://localhost:8080/servers/images/SERVER_DB_UP.png", Status.DOWN));
+			serverRepository.save(new Server(null, "157.240.3.35", "Facebook Server", "64 GB", "SERVER_DB", "http://localhost:8080/servers/images/SERVER_DB_DOWN.png", Status.DOWN));
+			serverRepository.save(new Server(null, "208.80.153.232", "Wikipedia Stack", "64 GB", "SERVER_STACK", "http://localhost:8080/servers/images/SERVER_STACK_UP.png", Status.DOWN));
+			serverRepository.save(new Server(null, "104.244.42.193", "Twitter Stack", "64 GB", "SERVER_STACK", "http://localhost:8080/servers/images/SERVER_STACK_DOWN.png", Status.DOWN));
 			serverRepository.save(new Server(null, "192.168.1.164", "Server", "32 GB", "SERVER", "http://localhost:8080/servers/images/SERVER_UP.png", Status.UP));
-			serverRepository.save(new Server(null, "192.168.1.165", "Server", "32 GB", "SERVER", "http://localhost:8080/servers/images/SERVER_DOWN.png", Status.DOWN));
+			serverRepository.save(new Server(null, "192.168.1.165", "Server", "32 GB", "SERVER", "http://localhost:8080/servers/images/SERVER_DOWN.png", Status.UP));
 		};
 	}
-//"C:/Users/Maniraj Sivasubbu/Documents/GitHub/manage-servers/servers/src/main/resources/static/images/SERVER_UP.png"
 
 	@Bean
 	public CorsFilter corsFilter() {

@@ -129,4 +129,19 @@ export class AppComponent {
       );
   }
 
+  exportReportAsSpreadsheet(): void {
+    const dataType = 'application/vnd.ms-excel.sheet.macroEnabeld.12';
+    const tableSelect = document.getElementById('servers');
+    const tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+    const downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+    downloadLink.download = 'servers-report.xls';
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+  exportReportAsPDF(): void {
+    window.print();
+  }
 }

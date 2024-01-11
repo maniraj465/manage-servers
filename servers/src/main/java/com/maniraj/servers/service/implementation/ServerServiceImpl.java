@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
@@ -42,8 +44,13 @@ public class ServerServiceImpl implements ServerService {
     @Override
     public Server ping(String ipAddress) throws IOException {
         log.info("Pinging server IP: {}", ipAddress);
-        Server server = serverRepository.findByIpAddress(ipAddress);
         InetAddress address = InetAddress.getByName(ipAddress);
+        if (address instanceof Inet6Address) {
+            log.info("It's ipv6 address - Pinging server IP: {}", ipAddress);
+        } else if (address instanceof Inet4Address) {
+            log.info("It's ipv4 address - Pinging server IP: {}", ipAddress);
+        }
+        Server server = serverRepository.findByIpAddress(ipAddress);
         server.setStatus(address.isReachable(5000) ? Status.UP : Status.DOWN);
         server.setImageUrl(buildServerImageUrl(server));
         return serverRepository.save(server);
