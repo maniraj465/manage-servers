@@ -74,6 +74,7 @@ public class ServerController {
 
     @PostMapping("/save")
     public ResponseEntity<Response> saveServer(@RequestBody @Valid Server server) {
+        System.out.println(server.toString());
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
