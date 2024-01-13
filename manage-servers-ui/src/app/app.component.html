@@ -70,8 +70,8 @@
                       class="material-icons" style="font-size: 30px;color:#4169e1;" title="Ping Server">
                       &#xe328;
                     </i>
-                    <i *ngIf="(filterStatus$ | async) === server.ipAddress" class="fa fa-spinner fa-spin"
-                      style="font-size: 24px;color:#ff9800;">
+                    <i *ngIf="(filterStatus$ | async) === server.ipAddress" class="fa fa-gear fa-spin"
+                      style="font-size: 30px;color:#ff9800;">
                     </i>
                   </a>
                 </td>
@@ -119,8 +119,8 @@
           <div class="form-group" style="margin: 0;">
             <label for="memory" class="col-form-label">Memory:</label>
             <div class="input-group" style="margin: 0;">
-              <input type="number" ngModel="8" name="memory" id="memory" class="form-control" min="8" step="8"
-                placeholder="Memory" required>
+              <input type="number" ng-ngModel="memoryValue" class="form-control" min="8" step="8" placeholder="Memory" required>
+              <input type="hidden" ngModel="8" name="memory" id="memory" class="form-control" value="{{ memoryValue }} GB" ng-bind="memoryValue" required>
               <div class="input-group-append">
                 <span class="input-group-text">GB</span>
               </div>
