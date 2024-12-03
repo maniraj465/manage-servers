@@ -129,6 +129,53 @@ export class AppComponent {
       );
   }
 
+  editServer(serverForm: NgForm): void {
+    this.isLoading.next(true);
+    this.appState$ = this.serverService.save$(serverForm.value as Server)
+      .pipe(
+        map(response => {
+          this.dataSubject.next(
+            {
+              ...response as object, data: { servers: [response['data']['server'], ...this.dataSubject.value.data.servers] },
+              timeStamp: undefined,
+              statusCode: 0,
+              status: '',
+              reason: '',
+              message: '',
+              developerMessage: ''
+            });
+          document.getElementById('closeModel').click();
+          this.isLoading.next(false);
+          serverForm.resetForm({ status: this.Status.DOWN });
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
+        }),
+        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+        catchError((error: string) => {
+          this.isLoading.next(false);
+          return of({ dataState: DataState.ERROR_STATE, error })
+        })
+      );
+  }
+
+  openEditServerModel(server: Server): void {
+    let editServerModel = document.getElementById('serverModal');
+    console.log(document.querySelector("input[id='ipAddress']").innerHTML);
+    
+    if(editServerModel ! = null) {
+      editServerModel.style.display = 'block';
+      document.querySelector("input[id='ipAddress']").innerHTML = server.ipAddress;
+      console.log(document.querySelector("input[id='ipAddress']").innerHTML);
+      alert(document.querySelector("input[id='ipAddress']").innerHTML + 'suffix');
+      // document.querySelector("input[id='ipAddress']").setAttribute('value', server.ipAddress);
+      // document.getElementById("input[id='name']").setAttribute('value', server.name);
+      // document.getElementById("input[id='memory']").setAttribute('value', server.memory);
+      // document.getElementById("select[id='type']").setAttribute('value', server.type);
+      // document.getElementById("select[id='status']").setAttribute('value', server.status);
+      // console.log(document.querySelector("input[id='ipAddress']"));
+      
+    }
+  }
+
   exportReportAsSpreadsheet(): void {
     const dataType = 'application/vnd.ms-excel.sheet.macroEnabeld.12';
     const tableSelect = document.getElementById('servers');

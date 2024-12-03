@@ -29,11 +29,6 @@ public class ServerController {
     @GetMapping("/list")
     public ResponseEntity<?> getServers() throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
-//        try {
-//            throw new InterruptedException("Error banner check");
-//        } catch (InterruptedException iex) {
-//            return iex;
-//        }
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())

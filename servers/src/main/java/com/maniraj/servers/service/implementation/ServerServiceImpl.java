@@ -30,7 +30,6 @@ import static org.springframework.data.domain.PageRequest.*;
 @Slf4j
 public class ServerServiceImpl implements ServerService {
 
-    @Autowired
     private final ServerRepository serverRepository;
 
     @Override
